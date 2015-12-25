@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% block body %}
+<div>
+  <form action="/exec_req/" method="POST" name="DBForm">
+      {% csrf_token %}
+      <select name="dbs">
+          <option value="cdb">Couchbase</option>
+          <option value="casdb">Casandra</option>
+          <option value="mdb">MongoDB</option>
+      </select>
+      <input type="submit" value="Execute"/>
+      <div>
+          Your request:<br/>
+          <textarea name="req" cols="50" rows="15" style="resize:none;"></textarea>
+      </div>
+      <div>
+          Result:<br/>
+          <div name="res">
+          <table>
+              {% for r in res %}
+                  <tr><td>
+                  {{ r }}
+                  </td></tr>
+              {% endfor %}
+          </table>
+          </div>
+      </div>
+  </form>
+</div>
+{% endblock %}
